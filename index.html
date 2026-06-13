@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoice Alvarendra Bookstore</title>
+<style>
+.alv-container{
+    max-width:900px;
+    margin:20px auto;
+    font-family:Arial,sans-serif;
+}
+
+.alv-form,
+.alv-invoice{
+    background:#fff;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.alv-form h2{
+    text-align:center;
+    color:#1f3f8f;
+    margin-top:0;
+}
+
+.alv-group{
+    margin-bottom:15px;
+}
+
+.alv-group label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+.alv-group input,
+.alv-group textarea{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+.alv-btn{
+    width:100%;
+    padding:12px;
+    background:#1f5ed8;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.alv-btn:hover{
+    background:#1648a6;
+}
+
+.alv-invoice{
+    display:none;
+    margin-top:20px;
+}
+
+.alv-header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.alv-header h1{
+    margin:0;
+    color:#1f3f8f;
+}
+
+.alv-header p{
+    margin:5px 0;
+    font-size:13px;
+}
+
+.alv-info{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.alv-info div{
+    width:48%;
+}
+
+.alv-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+.alv-table th{
+    background:#1f5ed8;
+    color:white;
+    padding:10px;
+}
+
+.alv-table td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:center;
+}
+
+.alv-total{
+    margin-top:20px;
+    text-align:right;
+}
+
+.alv-total span{
+    font-size:28px;
+    font-weight:bold;
+    color:#1f3f8f;
+}
+
+@media print{
+
+    header,
+    footer,
+    nav,
+    .tabs-outer,
+    .PageList,
+    .blog-pager,
+    .sidebar,
+    .widget{
+        display:none !important;
+    }
+
+    .alv-form,
+    .alv-btn{
+        display:none !important;
+    }
+
+    .alv-invoice{
+        display:block !important;
+        box-shadow:none !important;
+    }
+}
+</style>
+
+<div class="alv-container">
+
+<div class="alv-form">
+
+<h2>Formulir Pembelian Buku</h2>
+
+<div class="alv-group">
+<label>Nama</label>
+<input type="text" id="nama">
+</div>
+
+<div class="alv-group">
+<label>No. HP</label>
+<input type="text" id="hp">
+</div>
+
+<div class="alv-group">
+<label>Alamat</label>
+<textarea id="alamat"></textarea>
+</div>
+
+<div class="alv-group">
+<label>Judul Buku</label>
+<input type="text" id="judul">
+</div>
+
+<div class="alv-group">
+<label>Jumlah</label>
+<input type="number" id="jumlah" value="1">
+</div>
+
+<div class="alv-group">
+<label>Harga Buku (Rp)</label>
+<input type="number" id="harga">
+</div>
+
+<div class="alv-group">
+<label>Diskon (Rp)</label>
+<input type="number" id="diskon" value="0">
+</div>
+
+<div class="alv-group">
+<label>Ongkos Kirim (Rp)</label>
+<input type="number" id="ongkir" value="0">
+</div>
+
+<button class="alv-btn" onclick="buatInvoice()">
+Konfirmasi Pesanan
+</button>
+
+</div>
+<div class="alv-invoice" id="invoice">
+
+    <div class="alv-header">
+
+        <h1>ALVARENDRA BOOKSTORE</h1>
+
+        <p>ALVARENDRA PUBLISHER</p>
+
+        <p>
+            0817 5000 105 |
+            penerbit@alvarendrapublisher.com
+        </p>
+
+        <p>www.alvarendrapublisher.com</p>
+
+        <hr>
+
+        <h2 style="margin:10px 0;">
+            I N V O I C E
+        </h2>
+
+        <p>
+            NO PENGAJUAN :
+            <strong id="noInvoice"></strong>
+        </p>
+
+    </div>
+
+    <div class="alv-info">
+
+        <div>
+
+            <strong>KEPADA :</strong>
+
+            <br><br>
+
+            <span id="invNama"></span>
+
+            <br>
+
+            <span id="invAlamat"></span>
+
+            <br>
+
+            No. HP :
+            <span id="invHp"></span>
+
+        </div>
+
+        <div style="text-align:right;">
+
+            <strong>Tanggal Dikeluarkan :</strong>
+
+            <br><br>
+
+            <span id="tanggalInvoice"></span>
+
+        </div>
+
+    </div>
+
+    <table class="alv-table">
+
+        <thead>
+
+            <tr>
+
+                <th>Keterangan</th>
+
+                <th>Jumlah</th>
+
+                <th>Harga</th>
+
+                <th>Total</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td id="invJudul"></td>
+
+                <td id="invJumlah"></td>
+
+                <td id="invHarga"></td>
+
+                <td id="invSubtotal"></td>
+
+            </tr>
+
+            <tr>
+
+                <td>Diskon</td>
+
+                <td>-</td>
+
+                <td>-</td>
+
+                <td id="invDiskon"></td>
+
+            </tr>
+
+            <tr>
+
+                <td>Ongkos Kirim</td>
+
+                <td>-</td>
+
+                <td>-</td>
+
+                <td id="invOngkir"></td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+    <div class="alv-total">
+
+        Total :
+        <span id="invTotal">
+            Rp 0
+        </span>
+
+    </div>
+
+    <div style="
+        margin-top:30px;
+        display:flex;
+        justify-content:space-between;
+        flex-wrap:wrap;
+        gap:20px;
+    ">
+
+        <div style="width:48%;">
+
+            <h4>INFORMASI PEMBAYARAN</h4>
+
+            <p>
+                Bank Permata
+                <br>
+
+                <strong>
+                    74611247908554
+                </strong>
+
+                <br>
+
+                a/n PT Alvarendra Global
+            </p>
+
+        </div>
+
+        <div style="width:48%;">
+
+            <h4>SYARAT & KETENTUAN</h4>
+
+            <ul>
+
+                <li>
+                    Pembayaran melalui rekening yang tertera.
+                </li>
+
+                <li>
+                    Pembayaran dilakukan satu kali.
+                </li>
+
+                <li>
+                    Tidak menerima pembayaran cicilan.
+                </li>
+
+                <li>
+                    Simpan bukti pembayaran.
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div style="margin-top:30px;">
+
+        <button class="alv-btn"
+                onclick="window.print()">
+
+            Cetak / Simpan PDF
+
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+<script>
+function formatRupiah(angka){
+    return "Rp " + angka.toLocaleString("id-ID");
+}
+
+function generateNomorInvoice(){
+
+    const sekarang = new Date();
+
+    const tahun = sekarang.getFullYear().toString().slice(-2);
+    const bulan = String(sekarang.getMonth() + 1).padStart(2,"0");
+
+    const nomorAcak = Math.floor(
+        Math.random() * 9000
+    ) + 1000;
+
+    return "AP/ALV/" + tahun + bulan + "/" + nomorAcak;
+}
+
+function buatInvoice(){
+
+    const nama = document.getElementById("nama").value.trim();
+    const hp = document.getElementById("hp").value.trim();
+    const alamat = document.getElementById("alamat").value.trim();
+    const judul = document.getElementById("judul").value.trim();
+
+    const jumlah =
+        parseInt(document.getElementById("jumlah").value) || 0;
+
+    const harga =
+        parseInt(document.getElementById("harga").value) || 0;
+
+    const diskon =
+        parseInt(document.getElementById("diskon").value) || 0;
+
+    const ongkir =
+        parseInt(document.getElementById("ongkir").value) || 0;
+
+    if(
+        nama === "" ||
+        hp === "" ||
+        alamat === "" ||
+        judul === "" ||
+        jumlah <= 0 ||
+        harga <= 0
+    ){
+        alert("Mohon lengkapi seluruh data.");
+        return;
+    }
+
+    const subtotal = jumlah * harga;
+    const total = subtotal - diskon + ongkir;
+
+    document.getElementById("noInvoice").innerText =
+        generateNomorInvoice();
+
+    document.getElementById("tanggalInvoice").innerText =
+        new Date().toLocaleDateString("id-ID");
+
+    document.getElementById("invNama").innerText = nama;
+    document.getElementById("invAlamat").innerText = alamat;
+    document.getElementById("invHp").innerText = hp;
+
+    document.getElementById("invJudul").innerText = judul;
+    document.getElementById("invJumlah").innerText = jumlah + " Buku";
+
+    document.getElementById("invHarga").innerText =
+        formatRupiah(harga);
+
+    document.getElementById("invSubtotal").innerText =
+        formatRupiah(subtotal);
+
+    document.getElementById("invDiskon").innerText =
+        "-" + formatRupiah(diskon);
+
+    document.getElementById("invOngkir").innerText =
+        formatRupiah(ongkir);
+
+    document.getElementById("invTotal").innerText =
+        formatRupiah(total);
+
+    document.getElementById("invoice").style.display = "block";
+
+    document.getElementById("invoice").scrollIntoView({
+        behavior:"smooth"
+    });
+}
+</script>
+</body>
+</html>
