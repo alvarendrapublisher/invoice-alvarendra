@@ -424,6 +424,68 @@ Invoice Pembayaran - Alvarendra Publisher
 
 <!-- JavaScript Invoice -->
 <script src="invoice.js"></script>
+```html
+<script>
+
+/* =====================
+CETAK INVOICE
+===================== */
+
+document
+.getElementById("printInvoice")
+.addEventListener("click",function(){
+
+    window.print();
+
+});
+
+
+/* =====================
+DOWNLOAD PDF
+===================== */
+
+document
+.getElementById("downloadPdf")
+.addEventListener("click",function(){
+
+    const invoice =
+        document.getElementById("invoice");
+
+    const invoiceNumber =
+        document.getElementById("invoiceNumber")
+        .textContent;
+
+    html2pdf()
+        .set({
+
+            margin:10,
+
+            filename:
+                invoiceNumber + ".pdf",
+
+            image:{
+                type:"jpeg",
+                quality:1
+            },
+
+            html2canvas:{
+                scale:2
+            },
+
+            jsPDF:{
+                unit:"mm",
+                format:"a4",
+                orientation:"portrait"
+            }
+
+        })
+        .from(invoice)
+        .save();
+
+});
+
+</script>
+```
 
 </body>
 </html>
