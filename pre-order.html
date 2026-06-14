@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>
+Invoice Pembayaran - Alvarendra Publisher
+</title>
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet">
+
+<!-- CSS akan dibuat pada Bagian 4C -->
+
+<link rel="stylesheet"
+      href="style.css">
+
+</head>
+
+<body>
+
+<div class="invoice-wrapper">
+
+    <div id="invoice">
+
+        <!-- =========================
+        HEADER
+        ========================== -->
+
+        <div class="invoice-header">
+
+            <div class="logo-area">
+
+                <img
+                    src="Logo.png"
+                    alt="Logo Alvarendra"
+                    class="logo">
+
+            </div>
+
+            <div class="header-info">
+
+                <h1>
+                    INVOICE PEMBAYARAN
+                </h1>
+
+                <div class="invoice-meta">
+
+                    <p>
+                        <strong>
+                            No. Invoice :
+                        </strong>
+
+                        <span id="invoiceNumber">
+                            -
+                        </span>
+                    </p>
+
+                    <p>
+                        <strong>
+                            Tanggal :
+                        </strong>
+
+                        <span id="invoiceDate">
+                            -
+                        </span>
+                    </p>
+
+                    <p>
+
+                        <span class="status">
+
+                            MENUNGGU PEMBAYARAN
+
+                        </span>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+        DATA PEMBELI
+        ========================== -->
+
+        <div class="card">
+
+            <h2>
+                Data Pembeli
+            </h2>
+
+            <div class="buyer-info">
+
+                <p>
+                    <strong>Nama :</strong>
+
+                    <span id="buyerNama">
+                        -
+                    </span>
+                </p>
+
+                <p>
+                    <strong>No. HP :</strong>
+
+                    <span id="buyerHp">
+                        -
+                    </span>
+                </p>
+
+                <p>
+                    <strong>Alamat :</strong><br>
+
+                    <span id="buyerAlamat">
+                        -
+                    </span>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+        DETAIL PESANAN
+        ========================== -->
+
+        <div class="card">
+
+            <h2>
+                Detail Pesanan
+            </h2>
+
+            <div class="table-responsive">
+
+                <table class="invoice-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>No</th>
+
+                            <th>
+                                Judul Buku
+                            </th>
+
+                            <th>
+                                Harga
+                            </th>
+
+                            <th>
+                                Qty
+                            </th>
+
+                            <th>
+                                Subtotal
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="orderItems">
+
+                        <!-- Diisi otomatis oleh JavaScript -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+        PENGIRIMAN
+        ========================== -->
+
+        <div class="card">
+
+            <h2>
+                Rincian Pengiriman
+            </h2>
+
+            <div class="shipping-info">
+
+                <p>
+
+                    <strong>
+                        Jumlah Buku :
+                    </strong>
+
+                    <span id="totalBooks">
+
+                        0
+
+                    </span>
+
+                </p>
+
+                <p>
+
+                    <strong>
+                        Berat :
+                    </strong>
+
+                    <span id="shippingWeight">
+
+                        0 kg
+
+                    </span>
+
+                </p>
+
+                <p>
+
+                    <strong>
+                        Ongkir :
+                    </strong>
+
+                    <span id="shippingMethod">
+
+                        -
+
+                    </span>
+
+                </p>
+
+                <p>
+
+                    <strong>
+                        Biaya Ongkir :
+                    </strong>
+
+                    <span id="shippingCost">
+
+                        Rp 0
+
+                    </span>
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+        RINGKASAN PEMBAYARAN
+        ========================== -->
+
+        <div class="card total-card">
+
+            <h2>
+                Ringkasan Pembayaran
+            </h2>
+
+            <div class="summary">
+
+                <p>
+
+                    <span>
+                        Subtotal Buku
+                    </span>
+
+                    <span id="subtotalBooks">
+
+                        Rp 0
+
+                    </span>
+
+                </p>
+
+                <p>
+
+                    <span>
+                        Ongkir
+                    </span>
+
+                    <span id="summaryShipping">
+
+                        Rp 0
+
+                    </span>
+
+                </p>
+
+                <hr>
+
+                <p class="grand-total">
+
+                    <span>
+
+                        TOTAL TRANSFER
+
+                    </span>
+
+                    <span id="grandTotal">
+
+                        Rp 0
+
+                    </span>
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+        PEMBAYARAN
+        ========================== -->
+
+        <div class="card payment-card">
+
+            <h2>
+                Transfer ke
+            </h2>
+
+            <div class="payment-info">
+
+                <p>
+
+                    Bank Permata
+
+                </p>
+
+                <h3>
+
+                    74611247908554
+
+                </h3>
+
+                <p>
+
+                    a/n PT Alvarendra Global
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+        KONFIRMASI
+        ========================== -->
+
+        <div class="card confirmation-card">
+
+            <h2>
+                Konfirmasi Pembayaran
+            </h2>
+
+            <p>
+
+                Setelah melakukan pembayaran,
+                silakan konfirmasi dengan
+                mengirimkan bukti transaksi/
+                pembayaran ke WhatsApp Admin:
+
+            </p>
+
+            <h3>
+
+                08175000105
+
+            </h3>
+
+        </div>
+
+
+        <!-- =========================
+        TOMBOL AKSI
+        ========================== -->
+
+        <div class="invoice-actions">
+
+            <button id="printInvoice">
+
+                🖨️ Cetak Invoice
+
+            </button>
+
+            <button id="downloadPdf">
+
+                📄 Download PDF
+
+            </button>
+
+            <button
+                onclick="history.back()">
+
+                ← Kembali
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- html2pdf -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<!-- JavaScript Invoice -->
+<script src="invoice.js"></script>
+
+</body>
+</html>
+```
