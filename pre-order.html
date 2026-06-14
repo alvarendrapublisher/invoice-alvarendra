@@ -404,6 +404,9 @@ Invoice Pembayaran - Alvarendra Publisher
                 📄 Download PDF
 
             </button>
+              <button id="confirmPayment">
+    💬 Konfirmasi Pembayaran
+</button>
 
             <button
                 onclick="history.back()">
@@ -486,7 +489,44 @@ document
 
 </script>
 ```
+<script>
 
+document
+.getElementById("confirmPayment")
+.addEventListener("click", function(){
+
+    const invoice =
+        document.getElementById("invoiceNumber")
+        .textContent;
+
+    const nama =
+        document.getElementById("buyerNama")
+        .textContent;
+
+    const total =
+        document.getElementById("grandTotal")
+        .textContent;
+
+    const pesan =
+`Halo Admin Alvarendra Publisher, saya ingin melakukan konfirmasi pembayaran.
+
+No. Invoice: ${invoice}
+Nama: ${nama}
+Total Transfer: ${total}
+
+Bukti pembayaran saya lampirkan.
+
+Mohon dicek. Terima kasih.`;
+
+    window.open(
+        "https://wa.me/628175000105?text=" +
+        encodeURIComponent(pesan),
+        "_blank"
+    );
+
+});
+
+</script>
 </body>
 </html>
 ```
