@@ -488,7 +488,6 @@ document
 });
 
 </script>
-```
 <script>
 
 document
@@ -503,16 +502,50 @@ document
         document.getElementById("buyerNama")
         .textContent;
 
+    const hp =
+        document.getElementById("buyerHp")
+        .textContent;
+
+    const alamat =
+        document.getElementById("buyerAlamat")
+        .innerText;
+
     const total =
         document.getElementById("grandTotal")
         .textContent;
 
+    let detail = "";
+
+    document
+    .querySelectorAll("#orderItems tr")
+    .forEach(function(row, index){
+
+        const kolom =
+            row.querySelectorAll("td");
+
+        detail +=
+            (index + 1) + ". " +
+            kolom[1].innerText +
+            " × " +
+            kolom[3].innerText +
+            "\nSubtotal: " +
+            kolom[4].innerText +
+            "\n\n";
+
+    });
+
     const pesan =
-`Halo Admin Alvarendra Publisher, saya ingin melakukan konfirmasi pembayaran.
+`Halo Admin Alvarendra Publisher, saya ingin konfirmasi pembayaran.
 
 No. Invoice: ${invoice}
 Nama: ${nama}
-Total Transfer: ${total}
+No. HP: ${hp}
+
+Alamat:
+${alamat}
+
+Detail Pesanan:
+${detail}Total Transfer: ${total}
 
 Bukti pembayaran saya lampirkan.
 
