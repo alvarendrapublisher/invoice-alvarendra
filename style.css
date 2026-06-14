@@ -1,0 +1,270 @@
+```css
+/* =====================================
+ALVARENDA PUBLISHER
+FILE : style.css
+TAHAP 2C
+===================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#f5f6fa;
+    font-family:'Poppins',sans-serif;
+    color:#333;
+    padding:20px;
+}
+
+.invoice-wrapper{
+    max-width:1000px;
+    margin:auto;
+}
+
+#invoice{
+    background:#fff;
+    border-radius:20px;
+    padding:40px;
+    box-shadow:0 5px 25px rgba(0,0,0,.08);
+}
+
+/* =====================
+HEADER
+===================== */
+
+.invoice-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:30px;
+    margin-bottom:30px;
+    padding-bottom:25px;
+    border-bottom:2px solid #eee;
+}
+
+.logo{
+    width:160px;
+    max-width:100%;
+}
+
+.header-info{
+    text-align:right;
+}
+
+.header-info h1{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.invoice-meta p{
+    margin:6px 0;
+}
+
+.status{
+    display:inline-block;
+    padding:8px 15px;
+    border-radius:50px;
+    background:#FFF3CD;
+    color:#856404;
+    font-weight:600;
+    margin-top:10px;
+}
+
+/* =====================
+CARD
+===================== */
+
+.card{
+    border:1px solid #eee;
+    border-radius:15px;
+    padding:25px;
+    margin-bottom:25px;
+}
+
+.card h2{
+    margin-bottom:20px;
+    font-size:22px;
+}
+
+.card p{
+    margin-bottom:12px;
+    line-height:1.7;
+}
+
+/* =====================
+TABEL
+===================== */
+
+.table-responsive{
+    overflow-x:auto;
+}
+
+.invoice-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.invoice-table th{
+    background:#111;
+    color:#fff;
+    padding:15px;
+    text-align:left;
+}
+
+.invoice-table td{
+    padding:15px;
+    border-bottom:1px solid #eee;
+}
+
+.invoice-table tr:nth-child(even){
+    background:#fafafa;
+}
+
+/* =====================
+RINGKASAN
+===================== */
+
+.summary p{
+    display:flex;
+    justify-content:space-between;
+    margin:15px 0;
+}
+
+.summary hr{
+    border:none;
+    border-top:1px solid #ddd;
+    margin:20px 0;
+}
+
+.grand-total{
+    font-size:30px;
+    font-weight:700;
+}
+
+/* =====================
+PEMBAYARAN
+===================== */
+
+.payment-card,
+.confirmation-card{
+    text-align:center;
+}
+
+.payment-info h3{
+    font-size:34px;
+    margin:10px 0;
+}
+
+.confirmation-card h3{
+    margin-top:15px;
+    font-size:28px;
+}
+
+/* =====================
+TOMBOL
+===================== */
+
+.invoice-actions{
+    margin-top:30px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.invoice-actions button{
+    border:none;
+    padding:14px 24px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:600;
+    transition:.2s;
+}
+
+.invoice-actions button:hover{
+    transform:translateY(-2px);
+}
+
+#printInvoice{
+    background:#111;
+    color:#fff;
+}
+
+#downloadPdf{
+    background:#2563EB;
+    color:#fff;
+}
+
+.invoice-actions button:last-child{
+    background:#E5E7EB;
+    color:#111;
+}
+
+/* =====================
+RESPONSIVE
+===================== */
+
+@media(max-width:768px){
+
+    body{
+        padding:10px;
+    }
+
+    #invoice{
+        padding:20px;
+    }
+
+    .invoice-header{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .header-info{
+        text-align:center;
+    }
+
+    .header-info h1{
+        font-size:26px;
+    }
+
+    .card{
+        padding:18px;
+    }
+
+    .grand-total{
+        font-size:24px;
+    }
+
+    .payment-info h3,
+    .confirmation-card h3{
+        font-size:24px;
+    }
+
+}
+
+/* =====================
+CETAK
+===================== */
+
+@media print{
+
+    body{
+        background:#fff;
+        padding:0;
+    }
+
+    #invoice{
+        box-shadow:none;
+        border-radius:0;
+        padding:0;
+    }
+
+    .invoice-actions{
+        display:none;
+    }
+
+}
+```
